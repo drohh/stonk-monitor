@@ -1,0 +1,7 @@
+config.py
+*.pyc
+__pycache__/*
+*.cfg
+bin/*
+include/*
+lib/*
