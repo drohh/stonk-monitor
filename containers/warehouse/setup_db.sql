@@ -1,18 +1,4 @@
 CREATE SCHEMA stonk;
-CREATE TABLE stonk.quotes(
-    quote_id serial PRIMARY KEY,
-    company_id INT,
-    CONSTRAINT fk_company
-      FOREIGN KEY (company_id)
-        REFERENCES companies (company_id),
-    open REAL NOT NULL,
-    high REAL NOT NULL,
-    low REAL NOT NULL,
-    close REAL NOT NULL,
-    volume INT CHECK (volume >= 0),
-    datetime TIMESTAMP WITH TIME ZONE
-);
-
 CREATE TABLE stonk.companies(
     company_id serial PRIMARY KEY,
     name VARCHAR ( 50 ) UNIQUE NOT NULL,
@@ -24,3 +10,19 @@ VALUES ('AMC Entertainment', 'AMC');
 
 INSERT INTO stonk.companies(name, symbol)
 VALUES ('GameStop', 'GME');
+
+CREATE TABLE stonk.quotes(
+    quote_id serial PRIMARY KEY,
+    company_id INT,
+    CONSTRAINT fk_company
+      FOREIGN KEY (company_id)
+        REFERENCES stonk.companies (company_id),
+    current_price REAL NOT NULL,
+    change REAL,
+    percent_change REAL,
+    day_high REAL NOT NULL,
+    day_low REAL NOT NULL,
+    open REAL NOT NULL,
+    previous_close REAL NOT NULL,
+    datetime TIMESTAMP WITH TIME ZONE
+);
