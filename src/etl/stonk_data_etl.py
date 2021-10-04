@@ -49,12 +49,13 @@ def run() -> None:
     data = get_stonk_data(symbols)
     for d in data:
         d['str_dt'] = get_utc_from_unix_time(d.get('t'))
-    with WarehouseConnection(get_warehouse_creds()).managed_cursor() as curr:
-        print(curr)
-        p.execute_batch(curr, _get_stonk_insert_query(), data)
+    with WarehouseConnection(get_warehouse_creds()).managed_cursor() as cur:
+        print(cur)
+        p.execute_batch(cur, _get_stonk_insert_query(), data)
 
 if __name__ == '__main__':
     run()
+
     #symbols = ['AMC','GME']
     #fmt = "%Y-%m-%d %H:%M:%S%z"
     #data = get_stonk_data(symbols)
