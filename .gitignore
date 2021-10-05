@@ -1,4 +1,5 @@
 config.py
+.pem
 *.pyc
 __pycache__/*
 *.cfg
