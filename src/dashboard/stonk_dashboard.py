@@ -44,7 +44,6 @@ with WarehouseConnection(get_warehouse_creds()).managed_cursor() as cur:
         data_company.append(company_map.get(row[1]))
         data_price.append(row[2])
         data_datetime.append(row[9]) 
-        #data_datetime.append(datetime.strptime(row[9], fmt)) 
 
 fig = px.line(dict(stonk=data_company, price=data_price, datetime=data_datetime), x='datetime', y='price', color='stonk')
 
@@ -58,5 +57,5 @@ app.layout = html.Div(
 )
 
 if __name__ == '__main__':
-	app.run_server()
+	app.run_server(host='0.0.0.0')
 

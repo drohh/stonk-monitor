@@ -45,22 +45,21 @@ def _get_stonk_insert_query() -> str:
     '''
 
 def run() -> None:
+    # pull stonk data from finnhub API, add new datetime feature, and insert into database
     symbols = ['AMC','GME']
     data = get_stonk_data(symbols)
     for d in data:
         d['str_dt'] = get_utc_from_unix_time(d.get('t'))
     with WarehouseConnection(get_warehouse_creds()).managed_cursor() as cur:
-        print(cur)
         p.execute_batch(cur, _get_stonk_insert_query(), data)
 
 if __name__ == '__main__':
     run()
 
     #symbols = ['AMC','GME']
-    #fmt = "%Y-%m-%d %H:%M:%S%z"
     #data = get_stonk_data(symbols)
     #print(f"Before: {data}")
-    ## convert datetime 
+    ## add datetime feature 
     #for d in data:
     #    d['str_dt'] = get_utc_from_unix_time(d.get('t'))
     #print(f"After: {data}")

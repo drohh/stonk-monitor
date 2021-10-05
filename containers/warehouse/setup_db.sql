@@ -1,3 +1,7 @@
+DROP TABLE IF EXISTS stonk.companies;
+DROP TABLE IF EXISTS stonk.quotes;
+DROP SCHEMA IF EXISTS stonk;
+
 CREATE SCHEMA stonk;
 CREATE TABLE stonk.companies(
     company_id serial PRIMARY KEY,
@@ -26,3 +30,15 @@ CREATE TABLE stonk.quotes(
     previous_close REAL NOT NULL,
     datetime TIMESTAMP WITH TIME ZONE
 );
+
+INSERT INTO stonk.quotes (company_id, current_price, change, percent_change, day_high, day_low, open, previous_close, datetime) VALUES
+(1, 40, 0, 0, 0, 0, 0, 0, '2021-10-01 14:55:01-05');
+
+INSERT INTO stonk.quotes (company_id, current_price, change, percent_change, day_high, day_low, open, previous_close, datetime) VALUES
+(1, 42, 0, 0, 0, 0, 0, 0, '2021-10-01 15:00:01-05');
+
+INSERT INTO stonk.quotes (company_id, current_price, change, percent_change, day_high, day_low, open, previous_close, datetime) VALUES
+(2, 130, 0, 0, 0, 0, 0, 0, '2021-10-01 14:55:01-05');
+
+INSERT INTO stonk.quotes (company_id, current_price, change, percent_change, day_high, day_low, open, previous_close, datetime) VALUES
+(2, 135, 0, 0, 0, 0, 0, 0, '2021-10-01 15:00:01-05');

@@ -13,15 +13,20 @@ class DBConnInfo:
 
 class WarehouseConnection:
     def __init__(self, db_conn_info: DBConnInfo):
+        self.db_conn_info = db_conn_info
         self.conn_url = (
             f'postgresql://{db_conn_info.user}:{db_conn_info.password}@'
             f'{db_conn_info.host}:{db_conn_info.port}/{db_conn_info.db}'
         )
-        print(f'Connecting with {self.conn_url}')
+        print(f'Connected to database via {self.conn_url}')
 
     @contextmanager
     def managed_cursor(self, cursor_factory=None):
-        self.conn = psycopg2.connect(self.conn_url)
+        self.conn = psycopg2.connect(dbname=self.db_conn_info.db,
+                                    user=self.db_conn_info.user,
+                                    password=self.db_conn_info.password,
+                                    host=self.db_conn_info.host,
+                                    port=self.db_conn_info.port)
         self.conn.autocommit = True
         self.cur = self.conn.cursor(cursor_factory=cursor_factory)
         try:

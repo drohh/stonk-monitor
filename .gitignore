@@ -1,8 +1,10 @@
 config.py
-.pem
+*.pem
 *.pyc
-__pycache__/*
+**/__pycache__/*
 *.cfg
 bin/*
 include/*
 lib/*
+**/*_solo_*
+**/*notes.txt
