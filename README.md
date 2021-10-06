@@ -2,7 +2,7 @@
 
 ![Architecture Diagram](stonk-monitor-arch.svg)
 
-TODO:
+TODO:\
     1. Add usage documentation\
     2. Add screenshots\
     3. Create better-looking Plotly dashboard\
