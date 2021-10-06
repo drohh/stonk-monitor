@@ -1,5 +1,7 @@
 # Stonk Monitor
 
+A time series visualizer for only the most memey of stonks
+
 ![Architecture Diagram](stonk-monitor-arch.svg)
 
 TODO:
