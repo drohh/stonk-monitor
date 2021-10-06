@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# USAGE: ./productionize.sh <.pem file> <EC2 ip address>
+# USAGE: ./productionize.sh <.pem file> <EC2 public IP address>
 
-# inputs IP, pem file location
+# exit if not enough arguments
 if [ $# -ne 2 ]; then
-    echo 'Please enter your pem location and EC2 public DNS as ./copy_to_prod.sh pem-full-file-location EC2-Public-IPv4-DNS'
+    echo 'Please enter your pem location and EC2 public DNS as ./productionize.sh <path to .pem file> <EC2 public IP address>'
     exit 0
 fi
 
@@ -24,8 +24,9 @@ cd stonk-monitor
 chmod 400 $1
 scp -i $1 ../stonk-monitor.zip ubuntu@$2:~/.
 
-# send prod host dependency installation script to EC2
-scp -i $1 ./deploy_helpers/install_deps.sh ubuntu@$2:~/.
+# send scripts for dependency install and starting app
+scp -i $1 ./deploy_helpers/install_deps.sh ./deploy_helpers/start_containerized_app.sh ubuntu@$2:~/.
 
-# ssh into the EC2, install prod dependencies (mostly docker), & start containerized app
-ssh -t -i $1 ubuntu@$2 "unzip -o stonk-monitor.zip; chmod +x install_deps.sh; ./install_deps.sh; cd stonk-monitor; make up"
+# install prod system dependencies (mostly docker), and start app"
+ssh -i $1 ubuntu@$2 "chmod +x install_deps.sh start_containerized_app.sh; ./install_deps.sh && ./start_containerized_app.sh"
+

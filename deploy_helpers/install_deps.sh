@@ -5,6 +5,8 @@
 
 # ref: https://docs.docker.com/engine/install/ubuntu/
 
+echo "Starting production system dependency install..."
+
 # Uninstall old versions
 sudo apt-get remove docker docker-engine docker.io containerd runc
 
@@ -20,21 +22,23 @@ echo \
 sudo apt-get -y install \
   apt-transport-https \
   ca-certificates \
-  curl \
   gnupg \
   lsb-release \
   make \
   unzip
 
-sudo apt-get update
+# 2nd apt-get update
 
 # Install Docker Engine
 sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 
 # Install docker compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo curl -sL "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
 # Add user to docker group
 sudo usermod -aG docker $USER
-newgrp docker
+
+echo ""
+echo "SUCCESSFULLY INSTALLED PRODUCTION DEPENDENCIES"
+echo ""
