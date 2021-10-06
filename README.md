@@ -1,6 +1,6 @@
 # Stonk Monitor
 
-![Architecture Diagram](stonk-monitor-arch.png)
+![Architecture Diagram](stonk-monitor-arch.svg)
 
 TODO:
     1. Add usage documentation
